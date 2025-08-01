@@ -190,7 +190,8 @@ $tarifs = $pdo->query("
     <div class="container">
 
         <?php if ($clientAjoute): ?>
-            <div class="alert">Le client a été ajouté avec succès.</div>
+            <div class="alert">Le client <strong><?= htmlspecialchars($nomClientAjoute) ?></strong> a été ajouté avec
+                succès.</div>
         <?php endif; ?>
 
         <h1>Gestion des clients</h1>
