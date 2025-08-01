@@ -197,7 +197,7 @@ $tarifs = $pdo->query("
 
 <body>
     <div class="container">
-
+        <a class="back" href="admin.php">← Retour au menu admin</a>
         <?php if ($clientAjoute): ?>
             <div class="alert">Le client <strong><?= htmlspecialchars($nomClientAjoute) ?></strong> a été ajouté avec
                 succès.</div>
