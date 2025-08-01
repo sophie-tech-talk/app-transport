@@ -18,6 +18,7 @@ try {
 }
 
 $clientAjoute = false;
+$nomClientAjoute = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nom_client'])) {
     $nom = trim($_POST['nom_client']);
@@ -25,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nom_client'])) {
         $stmt = $pdo->prepare("INSERT INTO clients (nom) VALUES (?)");
         $stmt->execute([$nom]);
         $clientAjoute = true;
+        $nomClientAjoute = $nom;
     }
 }
 
