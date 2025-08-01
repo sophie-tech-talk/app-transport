@@ -207,7 +207,7 @@ $tarifs = $pdo->query("
 
         <h2>Liste des clients</h2>
         <?php if (count($clients) === 0): ?>
-            <p class="no-data">Aucun client renseigné.</p>
+            <p class="no-data">Aucun client renseigné</p>
         <?php else: ?>
             <ul>
                 <?php foreach ($clients as $c): ?>
