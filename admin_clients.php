@@ -17,11 +17,14 @@ try {
     exit;
 }
 
+$clientAjoute = false;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nom_client'])) {
     $nom = trim($_POST['nom_client']);
     if ($nom !== '') {
         $stmt = $pdo->prepare("INSERT INTO clients (nom) VALUES (?)");
         $stmt->execute([$nom]);
+        $clientAjoute = true;
     }
 }
 
@@ -73,6 +76,23 @@ $tarifs = $pdo->query("
         .container {
             max-width: 800px;
             margin: auto;
+        }
+
+        .alert {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 1em;
+            border-radius: 6px;
+            margin-bottom: 1em;
+        }
+
+        .client-list-top {
+            background: #fff;
+            padding: 1em;
+            border-radius: 6px;
+            margin-bottom: 2em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         h1,
@@ -167,8 +187,21 @@ $tarifs = $pdo->query("
 </head>
 
 <body>
-
     <div class="container">
+
+        <?php if ($clientAjoute): ?>
+            <div class="alert">✅ Le client a été ajouté avec succès.</div>
+        <?php endif; ?>
+
+        <div class="client-list-top">
+            <h2>Clients ajoutés</h2>
+            <ul>
+                <?php foreach ($clients as $c): ?>
+                    <li><?= htmlspecialchars($c['nom']) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
         <h1>Gestion des clients</h1>
 
         <form method="post">
@@ -188,10 +221,10 @@ $tarifs = $pdo->query("
             </select>
 
             <label>Type de colis</label>
-            <input type="text" name="type_colis" required placeholder="Ex : carton, palette, sac...">
+            <input type="text" name="type_colis" required placeholder="Ex : colis, carton, palette, sac...">
 
             <label>Catégorie</label>
-            <input type="text" name="categorie_colis" required placeholder="Ex : XS, L, XL...">
+            <input type="text" name="categorie_colis" required placeholder="Ex : Standard, Discount...">
 
             <label>Prix unitaire (€)</label>
             <input type="number" step="0.01" name="prix" required placeholder="Ex : 3.20">
@@ -233,7 +266,6 @@ $tarifs = $pdo->query("
 
         <a class="back" href="admin.php">← Retour au menu admin</a>
     </div>
-
 </body>
 
 </html>
