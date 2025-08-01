@@ -198,12 +198,6 @@ $tarifs = $pdo->query("
 
         <h1>Gestion des clients</h1>
 
-        <form method="post">
-            <label>Ajouter un client :</label>
-            <input type="text" name="nom_client" required placeholder="Nom du client">
-            <button type="submit">Ajouter</button>
-        </form>
-
         <h2>Liste des clients</h2>
         <ul>
             <?php foreach ($clients as $c): ?>
@@ -214,6 +208,12 @@ $tarifs = $pdo->query("
                 </li>
             <?php endforeach; ?>
         </ul>
+
+        <form method="post">
+            <label>Ajouter un client :</label>
+            <input type="text" name="nom_client" required placeholder="Nom du client">
+            <button type="submit">Ajouter</button>
+        </form>
 
         <h2>Ajouter un tarif</h2>
         <form method="post">
