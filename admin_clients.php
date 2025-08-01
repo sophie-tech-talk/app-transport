@@ -190,17 +190,8 @@ $tarifs = $pdo->query("
     <div class="container">
 
         <?php if ($clientAjoute): ?>
-            <div class="alert">✅ Le client a été ajouté avec succès.</div>
+            <div class="alert">Le client a été ajouté avec succès.</div>
         <?php endif; ?>
-
-        <div class="client-list-top">
-            <h2>Clients ajoutés</h2>
-            <ul>
-                <?php foreach ($clients as $c): ?>
-                    <li><?= htmlspecialchars($c['nom']) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
 
         <h1>Gestion des clients</h1>
 
@@ -209,6 +200,17 @@ $tarifs = $pdo->query("
             <input type="text" name="nom_client" required placeholder="Nom du client">
             <button type="submit">Ajouter</button>
         </form>
+
+        <h2>Liste des clients</h2>
+        <ul>
+            <?php foreach ($clients as $c): ?>
+                <li>
+                    <?= htmlspecialchars($c['nom']) ?>
+                    <a class="delete" href="?delete_client=<?= $c['id'] ?>"
+                        onclick="return confirm('Supprimer ce client et tous ses tarifs ?')">[Supprimer]</a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
 
         <h2>Ajouter un tarif</h2>
         <form method="post">
@@ -224,7 +226,7 @@ $tarifs = $pdo->query("
             <input type="text" name="type_colis" required placeholder="Ex : colis, carton, palette, sac...">
 
             <label>Catégorie</label>
-            <input type="text" name="categorie_colis" required placeholder="Ex : Standard, Discount...">
+            <input type="text" name="categorie_colis" required placeholder="Ex : standard, discount...">
 
             <label>Prix unitaire (€)</label>
             <input type="number" step="0.01" name="prix" required placeholder="Ex : 3.20">
@@ -252,17 +254,6 @@ $tarifs = $pdo->query("
                 </tr>
             <?php endforeach; ?>
         </table>
-
-        <h2>Supprimer un client</h2>
-        <ul>
-            <?php foreach ($clients as $c): ?>
-                <li>
-                    <?= htmlspecialchars($c['nom']) ?>
-                    <a class="delete" href="?delete_client=<?= $c['id'] ?>"
-                        onclick="return confirm('Supprimer ce client et tous ses tarifs ?')">[Supprimer]</a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
 
         <a class="back" href="admin.php">← Retour au menu admin</a>
     </div>
