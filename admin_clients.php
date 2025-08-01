@@ -199,15 +199,19 @@ $tarifs = $pdo->query("
         <h1>Gestion des clients</h1>
 
         <h2>Liste des clients</h2>
-        <ul>
-            <?php foreach ($clients as $c): ?>
-                <li>
-                    <?= htmlspecialchars($c['nom']) ?>
-                    <a class="delete" href="?delete_client=<?= $c['id'] ?>"
-                        onclick="return confirm('Supprimer ce client et tous ses tarifs ?')">[Supprimer]</a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <?php if (count($clients) === 0): ?>
+            <p>Aucun client renseigné.</p>
+        <?php else: ?>
+            <ul>
+                <?php foreach ($clients as $c): ?>
+                    <li>
+                        <?= htmlspecialchars($c['nom']) ?>
+                        <a class="delete" href="?delete_client=<?= $c['id'] ?>"
+                            onclick="return confirm('Supprimer ce client et tous ses tarifs ?')">[Supprimer]</a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
 
         <form method="post">
             <label>Ajouter un client :</label>
