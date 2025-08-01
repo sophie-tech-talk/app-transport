@@ -97,6 +97,13 @@ $tarifs = $pdo->query("
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
+        .no-data {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin: 1em 0;
+        }
+
         h1,
         h2 {
             text-align: center;
@@ -200,7 +207,7 @@ $tarifs = $pdo->query("
 
         <h2>Liste des clients</h2>
         <?php if (count($clients) === 0): ?>
-            <p>Aucun client renseigné.</p>
+            <p class="no-data">Aucun client renseigné.</p>
         <?php else: ?>
             <ul>
                 <?php foreach ($clients as $c): ?>
